@@ -7,3 +7,4 @@ authlib
 pdfplumber
 python-pptx
 numpy
+openai-whisper
