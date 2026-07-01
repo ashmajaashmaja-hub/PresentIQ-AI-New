@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PresentIQ AI - Live Practice</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/live_practice.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎤 PresentIQ AI - Live Practice</h1>
+
+    <p>
+        Practice your presentation with AI-powered coaching.
+    </p>
+
+    <div class="camera-box">
+
+        <video id="camera" autoplay playsinline></video>
+
+    </div>
+
+    <div class="buttons">
+
+        <button onclick="startCamera()">
+            ▶ Start Practice
+        </button>
+
+        <button onclick="stopCamera()">
+            ⏹ Stop Practice
+        </button>
+
+    </div>
+
+    <div class="timer-box">
+
+        <h2>⏱ Presentation Timer</h2>
+
+        <h1 id="timer">
+            00:00
+        </h1>
+
+    </div>
+
+    <div class="feedback-box">
+
+    <h2>🤖 AI Presentation Report</h2>
+
+    <div id="feedback">
+
+        <div class="report-card">
+            <h3>🎯 Overall Score</h3>
+            <p id="score">Waiting...</p>
+        </div>
+
+        <div class="report-card">
+            <h3>😊 Confidence</h3>
+            <p id="confidence">Waiting...</p>
+        </div>
+
+        <div class="report-card">
+            <h3>😰 Nervousness</h3>
+            <p id="nervousness">Waiting...</p>
+        </div>
+
+        <div class="report-card">
+            <h3>🗣 Communication</h3>
+            <p id="communication">Waiting...</p>
+        </div>
+        <div class="report-card">
+            <h3>✅ Strengths</h3>
+            <ul id="strengths"></ul>
+        </div>
+
+        <div class="report-card">
+            <h3>💡 Improvements</h3>
+            <ul id="improvements"></ul>
+        </div>
+
+        <div class="report-card">
+            <h3>📝 AI Feedback</h3>
+            <p id="finalfeedback">
+                Click Start Practice and begin speaking.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+    <br>
+
+    <div class="report-buttons">
+    <button onclick="location.reload()">🔄 Practice Again</button>
+
+    
+
+    <button onclick="window.location.href='/dashboard'">
+        🏠 Dashboard
+    </button>
+</div>
+
+<script>
+
+let stream; 
+let recognition;
+let transcript = "";
+let seconds = 0;
+let timer;
+function startTimer() {
+
+    seconds = 0;
+
+    timer = setInterval(function () {
+
+        seconds++;
+
+        let min = Math.floor(seconds / 60);
+        let sec = seconds % 60;
+
+        document.getElementById("timer").innerHTML =
+            String(min).padStart(2, "0") + ":" +
+            String(sec).padStart(2, "0");
+
+    }, 1000);
+
+}
+
+function stopTimer() {
+
+    clearInterval(timer);
+
+}
+
+async function startCamera() {
+
+    try {
+
+        stream = await navigator.mediaDevices.getUserMedia({
+            video:true,
+            audio:true
+        });
+
+        document.getElementById("camera").srcObject = stream;
+
+        startSpeechRecognition();
+        startTimer();
+
+    }
+
+    catch(err){
+        alert(err);
+    }
+
+}
+
+function stopCamera(){
+
+    if(stream){
+
+        stream.getTracks().forEach(track=>track.stop());
+
+    }
+
+    if(recognition){
+
+        recognition.stop();
+        stopTimer();
+
+    }
+
+    analyzeSpeech();
+
+}
+
+function startSpeechRecognition(){
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if(!SpeechRecognition){
+        alert("Speech Recognition is not supported in this browser.");
+        return;
+    }
+
+    recognition = new SpeechRecognition();
+
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+
+    recognition.onstart = function(){
+    document.getElementById("feedback").innerHTML =
+        "<b>🎤 Listening... Start speaking.</b>";
+};
+    recognition.onresult = function(event){
+
+        transcript = "";
+
+        for(let i=0;i<event.results.length;i++){
+            transcript += event.results[i][0].transcript + " ";
+        }
+
+        document.getElementById("feedback").innerHTML = transcript;
+    };
+
+    recognition.onerror = function(event){
+    console.log(event.error);
+    document.getElementById("feedback").innerHTML =
+        "<span style='color:red;'>⚠️ Speech recognition error. Please try again.</span>";
+};
+    recognition.onend = function(){
+        console.log("Speech Recognition Ended");
+    };
+
+    recognition.start();
+}
+
+function analyzeSpeech(){
+
+fetch("/analyze_speech",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+speech:transcript
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data => {
+
+document.getElementById("feedback").innerHTML = `
+
+
+<p><b>⭐ Overall Score:</b> ${data.score}</p>
+
+<p><b>💪 Confidence:</b> ${data.confidence}</p>
+
+<p><b>😰 Nervousness:</b> ${data.nervousness}</p>
+
+<p><b>🗣 Communication:</b> ${data.communication}</p>
+
+<h3>✅ Strengths</h3>
+<ul>
+${data.strengths.map(x=>`<li>${x}</li>`).join("")}
+</ul>
+
+<h3>📈 Improvements</h3>
+<ul>
+${data.improvements.map(x=>`<li>${x}</li>`).join("")}
+</ul>
+
+<h3>🎯 Final Feedback</h3>
+
+<p>${data.feedback}</p>
+
+`;
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>

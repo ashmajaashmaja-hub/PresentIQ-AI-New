@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PresentIQ AI Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        <i class="fa-solid fa-brain"></i>
+        <h2>PresentIQ</h2>
+    </div>
+
+    <ul>
+
+        <li class="active">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </li>
+
+        <li>
+            <i class="fa-solid fa-file-powerpoint"></i>
+            Upload PPT
+        </li>
+
+        <li>
+            <i class="fa-solid fa-video"></i>
+            Live Practice
+        </li>
+
+        <li>
+            <i class="fa-solid fa-upload"></i>
+            Upload Video
+        </li>
+
+
+    </ul>
+
+    <a href="/logout" class="logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Hello, {{ username }} 👋</h1>
+            <p>Welcome back! Ready to improve your presentation?</p>
+        </div>
+
+        <div class="profile">
+            <i class="fa-solid fa-circle-user"></i>
+            {{ username }}
+        </div>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <i class="fa-solid fa-file-powerpoint"></i>
+            <h3>Upload PPT</h3>
+            <p>Upload presentation slides.</p>
+            <a href="/upload">
+                <button>Open</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-video"></i>
+            <h3>Live Practice</h3>
+            <p>Practice with webcam.</p>
+            <a href="/live_practice">
+                <button>Start</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-upload"></i>
+            <h3>Upload Video</h3>
+            <p>Analyze recorded presentation.</p>
+            <a href="/upload_video">
+                <button>Upload Video</button>
+            </a>
+        </div>
+
+       
+    </div>
+
+    <div class="bottom-grid">
+
+        <div class="score-card">
+
+            <h2>AI Performance</h2>
+
+            <div class="score">
+                <span>Confidence</span>
+                <strong>92%</strong>
+            </div>
+
+            <div class="score">
+                <span>Eye Contact</span>
+                <strong>84%</strong>
+            </div>
+
+            <div class="score">
+                <span>Voice Clarity</span>
+                <strong>96%</strong>
+            </div>
+
+        </div>
+
+        <div class="tip-card">
+
+            <h2>💡 AI Tip</h2>
+
+            <p>
+                Slow down during your conclusion.
+                Maintain eye contact and avoid filler
+                words like "um" and "uh".
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

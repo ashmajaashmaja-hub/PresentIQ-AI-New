@@ -1,0 +1,113 @@
+body{
+
+margin:0;
+font-family:Arial;
+background:#eef5ff;
+
+}
+
+.container{
+
+text-align:center;
+padding:40px;
+
+}
+
+video{
+
+width:700px;
+max-width:95%;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+button{
+
+margin:15px;
+padding:15px 30px;
+
+background:#2563eb;
+color:white;
+
+border:none;
+
+border-radius:12px;
+
+font-size:18px;
+
+cursor:pointer;
+
+}
+.camera-box{
+    width:700px;
+    height:400px;
+    background:#000;
+    border-radius:20px;
+    overflow:hidden;
+    margin:30px auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#camera{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+.report-card{
+    background:white;
+    margin:15px;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.15);
+}
+
+.report-card h3{
+    color:#1976d2;
+    margin-bottom:10px;
+}
+
+.report-card p{
+    font-size:18px;
+    line-height:1.6;
+}
+.feedback-box{
+    width:85%;
+    max-width:900px;
+    margin:30px auto;
+    padding:30px;
+    background:white;
+    border-radius:15px;
+    box-shadow:0 5px 15px 
+rgba(0,0,0,.15);
+    text-align:left;
+}
+.feedback-box ul{
+    margin-left:25px;
+}
+
+.feedback-box li{
+    margin-bottom:8px;
+}
+.report-buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:25px;
+}
+
+.report-buttons button{
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#2f80ed;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.report-buttons button:hover{
+    background:#1565c0;
+}

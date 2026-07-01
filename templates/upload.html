@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PPT - PresentIQ</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="upload-container">
+
+    <div class="upload-card">
+
+        <i class="fa-solid fa-file-powerpoint upload-icon"></i>
+
+        <h2>Upload Presentation</h2>
+
+        <p>Select your PowerPoint (.ppt, .pptx or .pdf)</p>
+
+        <form id="uploadForm" method="POST" enctype="multipart/form-data">
+
+    <input type="file" name="ppt" accept=".ppt,.pptx,.pdf" required>
+
+    <button type="submit" id="uploadBtn">
+        Upload & Analyze
+    </button>
+
+</form>
+
+<div id="loading" style="display:none;">
+
+    <div class="loader"></div>
+
+    <h2>🤖 PresentIQ AI</h2>
+
+    <p>Analyzing your presentation...</p>
+
+    <p>📄 Reading document...</p>
+    <p>🧠 Understanding content...</p>
+    <p>📊 Evaluating presentation...</p>
+    <p>💡 Generating suggestions...</p>
+
+</div>
+        <br>
+
+        <a href="/dashboard">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+<script>
+
+document.getElementById("uploadForm").addEventListener("submit", function(){
+
+    document.getElementById("uploadForm").style.display="none";
+
+    document.getElementById("loading").style.display="block";
+
+});
+
+</script>
+
+</body>
+</html>

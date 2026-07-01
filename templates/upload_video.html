@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PresentIQ AI - Upload Video</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload_video.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>🤖 PresentIQ AI</h1>
+        <h2>Upload Presentation Video</h2>
+
+        <p class="subtitle">
+            Upload your presentation video and receive an AI-generated performance report.
+        </p>
+
+        <form action="/upload_video" method="POST" enctype="multipart/form-data">
+
+            <div class="upload-box">
+
+                <div class="upload-icon">🎥</div>
+
+                <p>Select your presentation video</p>
+
+                <input
+                    type="file"
+                    name="video"
+                    accept="video/*"
+                    required
+                >
+
+                <small>Supported formats: MP4 • AVI • MOV</small>
+
+            </div>
+
+            <button type="submit" class="upload-btn">
+                🚀 Upload & Analyze
+            </button>
+
+        </form>
+
+        <div class="buttons">
+
+            <a href="/dashboard" class="back-btn">
+                ⬅ Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PresentIQ AI Report</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:30px;
+    background:#eef4fb;
+    font-family:Arial,sans-serif;
+}
+
+.container{
+    width:85%;
+    margin:auto;
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0px 0px 15px rgba(0,0,0,.15);
+}
+
+h1{
+    color:#1a237e;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.section{
+    background:#f8fbff;
+    border-left:6px solid #1565C0;
+    border-radius:10px;
+    padding:18px;
+    margin-top:20px;
+}
+
+.section h2{
+    color:#1565C0;
+    margin-top:0;
+}
+
+.info p{
+    font-size:18px;
+    margin:12px 0;
+}
+
+ul{
+    font-size:17px;
+    line-height:1.8;
+}
+
+.feedback{
+    font-size:17px;
+    line-height:1.8;
+}
+
+.transcript{
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    line-height:1.8;
+}
+
+.buttons{
+    margin-top:40px;
+    text-align:center;
+}
+
+button{
+
+    background:#1565C0;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 28px;
+
+    font-size:16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    margin:10px;
+
+}
+
+button:hover{
+
+    background:#0D47A1;
+
+}
+
+a{
+
+text-decoration:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🤖 PresentIQ AI Presentation Report</h1>
+
+<div class="section info">
+
+<p><b>⭐ Overall Score :</b> {{ report.score }}/10</p>
+
+<p><b>💪 Confidence :</b> {{ report.confidence }}/10</p>
+
+<p><b>😰 Nervousness :</b> {{ report.nervousness }}/10</p>
+
+<p><b>🗣 Communication :</b> {{ report.communication }}/10</p>
+
+
+
+</div>
+
+<div class="section">
+
+<h2>✅ Strengths</h2>
+
+<ul>
+
+{% for item in report.strengths %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>📈 Areas for Improvement</h2>
+
+<ul>
+
+{% for item in report.improvements %}
+
+<li>{{ item.replace('**','') }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+
+<div class="section">
+
+<h2>🤖 AI Summary</h2>
+
+<div class="feedback">
+
+{{ report.feedback }}
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button onclick="window.print()">
+
+📄 Download Report
+
+</button>
+
+<a href="/upload_video">
+
+<button>
+
+🎥 Upload Another Video
+
+</button>
+
+</a>
+
+<a href="/dashboard">
+
+<button>
+
+🏠 Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
