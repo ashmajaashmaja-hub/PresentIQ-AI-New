@@ -8,3 +8,4 @@ pdfplumber
 python-pptx
 numpy
 openai-whisper
+python-dotenv
