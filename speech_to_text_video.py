@@ -10,6 +10,7 @@ def speech_to_text_video(video_path):
 
     video = VideoFileClip(video_path)
     video.audio.write_audiofile(audio_path, logger=None)
+    video.close()
 
     with sr.AudioFile(audio_path) as source:
         audio = recognizer.record(source)
@@ -21,5 +22,5 @@ def speech_to_text_video(video_path):
 
     if os.path.exists(audio_path):
         os.remove(audio_path)
-
+    del video
     return transcript
