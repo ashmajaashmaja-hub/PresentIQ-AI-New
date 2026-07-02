@@ -1,5 +1,4 @@
 import cv2
-import mediapipe as mp
 from flask import jsonify
 from flask import Flask, render_template, request, redirect, session
 from authlib.integrations.flask_client import OAuth
