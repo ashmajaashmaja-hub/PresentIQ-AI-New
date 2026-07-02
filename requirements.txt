@@ -7,5 +7,6 @@ pdfplumber
 python-pptx
 numpy
 python-dotenv
-SpeechRecognition pydub
-moviepy SpeechRecognition
+SpeechRecognition 
+pydub
+moviepy 
