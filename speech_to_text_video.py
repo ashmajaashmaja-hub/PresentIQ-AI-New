@@ -1,5 +1,5 @@
 import speech_recognition as sr
-from moviepy import VideoFileClip
+from moviepy.editor import VideoFileClip
 import os
 
 def speech_to_text_video(video_path):
